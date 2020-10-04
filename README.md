@@ -7,7 +7,7 @@ Feel free to look and use the code, its working really well :)
 
 QuickStart:
 1. Create Empty Redis instance and fill Host, Port and DB
-   - Docker command: docker run --name redis-camera -p 7001:6379 -d redis
+   - Docker command: docker run --name redis-doorkeeper -p 7001:6379 -d redis
 2. Create a Telegram bot using this this tutorial: https://medium.com/@ManHay_Hong/how-to-create-a-telegram-bot-and-send-messages-with-python-4cf314d9fa3e
    And Fill Telegram Bot Token and Chat Id
 3. Add images do ./Images folder, and set the name of each image to person name
