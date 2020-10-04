@@ -3,7 +3,7 @@
 Hello everyone!
 This is a small project I did at my home in order to alert me every time someone is passing through my security camera.
 Its uses telegram api to send a messeage everytime someone recognized is passing through a network camera.
-Feel free to look and use the code, its working really good :)
+Feel free to look and use the code, its working really well :)
 
 QuickStart:
 1. Create Empty Redis instance and fill Host,Port and DB
