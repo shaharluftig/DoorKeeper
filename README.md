@@ -12,3 +12,5 @@ QuickStart:
    And Fill Telegram Bot Token and Chat Id
 3. Add images do ./Images folder, and set the name of each image to person name
 4. Run Main.py
+
+~ Use INFER_IMAGE_FOLDER Only on the first run in order to load all images to redis, after that set it to False ~
