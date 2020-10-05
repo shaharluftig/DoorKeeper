@@ -9,13 +9,14 @@ class PythonLogger(ILogger):
         logging.basicConfig(filename=output_file, level=level)
         self.logger = logging.getLogger(PYTHON_LOGGER_NAME)
 
-    def log(self, message):
+    def log(self, message: str):
         self.logger.info(message)
 
     def session_log(self, func):
         def wrapper(*args, **kwargs):
-            self.log("Session started!")
-            func(*args, **kwargs)
-            self.log("Session ended!")
+            self.log(f"{func.__name__} started!")
+            data = func(*args, **kwargs)
+            self.log(f"{func.__name__} ended!")
+            return data
 
         return wrapper
