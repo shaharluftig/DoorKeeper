@@ -11,6 +11,7 @@ QuickStart:
 2. Create a Telegram bot using this this tutorial: https://medium.com/@ManHay_Hong/how-to-create-a-telegram-bot-and-send-messages-with-python-4cf314d9fa3e
    And Fill Telegram Bot Token and Chat Id
 3. Add images to ./Images folder, and set the name of each image to person name
+4. set IP_CAMERA_URL to your ip camera ip (I used IP Webcam android app), for example "http://192.168.1.24:8080/video"
 4. Run Main.py
 
 ~ Use INFER_IMAGE_FOLDER Only on the first run in order to load all images to redis, after that set it to False ~
