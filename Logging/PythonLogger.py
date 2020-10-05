@@ -9,7 +9,7 @@ class PythonLogger(ILogger):
         logging.basicConfig(filename=output_file, level=level)
         self.logger = logging.getLogger(PYTHON_LOGGER_NAME)
 
-    def log(self, message):
+    def log(self, message: str):
         self.logger.info(message)
 
     def session_log(self, func):

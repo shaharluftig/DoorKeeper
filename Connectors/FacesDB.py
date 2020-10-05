@@ -21,7 +21,7 @@ class FacesDB(RedisConnector):
         return faces_data
 
     @logger.session_log
-    def infer_image_folder(self, path, model="hog"):
+    def infer_image_folder(self, path: str, model="hog"):
         for image in os.listdir(path):
             image_path = path + "/" + image
             logger.log(f"Inferring : {image_path}")
