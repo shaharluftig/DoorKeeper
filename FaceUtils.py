@@ -4,7 +4,6 @@ import cv2
 import face_recognition
 import imutils
 import numpy as np
-from matplotlib.image import imsave
 
 from Config import THRESHOLD
 
@@ -46,5 +45,4 @@ def get_frame_encoding(frame: np.array, model="hog"):
 
 def save_frame_to_disk(file_name, frame: np.array):
     if frame is not None:
-        frame = imutils.resize(frame, width=750)
-        imsave(file_name, frame)
+        cv2.imwrite(file_name, frame)
