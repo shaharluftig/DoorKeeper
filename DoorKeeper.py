@@ -21,7 +21,8 @@ class DoorKeeper:
         while True:
             faces_matches, number_of_faces = [], 1
             for batch in range(self.shots_per_recognize):
-                encodings = FaceUtils.get_frame_encoding(frame=self.vs.read(), model=self.model)
+                frame = self.get_frame()
+                encodings = FaceUtils.get_frame_encoding(frame, model=self.model)
                 number_of_faces = len(encodings) if len(encodings) != 0 else number_of_faces
                 for encoding in encodings:
                     match = FaceUtils.compare_faces(faces_data, encoding)
@@ -29,6 +30,12 @@ class DoorKeeper:
                     time.sleep(CAPTURE_INTERVAL)
             matches = FaceUtils.determine_persons(faces_matches, number_of_faces)
             self.__send_message(matches)
+
+    def get_frame(self):
+        frame = self.vs.read()
+        if frame is not None:
+            return frame
+        raise FaceUtils.FaceException("Cant get frame from VideoStream")
 
     def __send_message(self, matches):
         if matches:
