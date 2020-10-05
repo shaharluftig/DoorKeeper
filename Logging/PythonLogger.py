@@ -14,8 +14,8 @@ class PythonLogger(ILogger):
 
     def session_log(self, func):
         def wrapper(*args, **kwargs):
-            self.log("Session started!")
+            self.log(f"{func.__name__} started!")
             func(*args, **kwargs)
-            self.log("Session ended!")
+            self.log(f"{func.__name__} ended!")
 
         return wrapper
