@@ -9,7 +9,7 @@ logger = PythonLogger()
 
 
 class FSProvider(IProvider):
-    def __init__(self, path, model="hog"):
+    def __init__(self, path: str, model="hog"):
         self.path = path
         self.model = model
 

@@ -20,7 +20,7 @@ class MongoConnector(IConnector):
         return data
 
     @staticmethod
-    def __to_dict(object):
-        if isinstance(object, list):
-            return [item.__dict__ for item in object]
-        return object.__dict__
+    def __to_dict(docs):
+        if isinstance(docs, list):
+            return [item.__dict__ for item in docs]
+        return docs.__dict__

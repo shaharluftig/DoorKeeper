@@ -33,16 +33,16 @@ def compare_faces(faces_data: dict, encoding: np.array):
         return faces_data_distances[best_match]
 
 
-def save_frame_to_disk(file_name, frame: np.array):
+def save_frame_to_disk(file_name: str, frame: np.array):
     if frame is not None:
         cv2.imwrite(file_name, frame)
 
 
-def infer_url_image(url, model="hog") -> np.array:
+def infer_url_image(url: str, model="hog") -> np.array:
     resp = urllib.request.urlopen(url)
     image = np.asarray(bytearray(resp.read()), dtype="uint8")
     return prepare_image(cv2.imdecode(image, cv2.COLOR_BGR2RGB), model)
 
 
-def infer_fs_image(path, model="hog") -> np.array:
+def infer_fs_image(path: str, model="hog") -> np.array:
     return prepare_image(cv2.imread(path, cv2.COLOR_BGR2RGB), model)[0]
