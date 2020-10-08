@@ -24,7 +24,7 @@ class DoorKeeper:
             faces_matches, number_of_faces, non_empty_frame = [], 1, None
             for batch in range(self.shots_per_recognize):
                 frame = self.__get_frame()
-                encodings = FaceUtils.get_frame_encoding(frame, model=self.model)
+                encodings = FaceUtils.prepare_image(frame, model=self.model)
                 if len(encodings) != 0:
                     number_of_faces, non_empty_frame = len(encodings), frame
                 for encoding in encodings:
@@ -44,7 +44,7 @@ class DoorKeeper:
     def __send_message(self, matches: list, frame: np.array):
         FaceUtils.save_frame_to_disk(TEMP_IMAGE_PATH, frame)
         if matches:
-            persons = ','.join([person[0] for person in matches])
+            persons = ",".join([str(person[0]) for person in matches])
             self.__upload_to_output_stream(OUTPUT_STRING.format(persons=persons), TEMP_IMAGE_PATH)
         else:
             self.__upload_to_output_stream(OUTPUT_STRING.format(persons="Unknown"), TEMP_IMAGE_PATH)
