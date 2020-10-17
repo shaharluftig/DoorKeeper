@@ -28,7 +28,6 @@ def infer_providers(providers):
 if __name__ == '__main__':
     db = FacesDB(MONGO_HOST, MONGO_PORT, MONGO_DB, MONGO_COLLECTION)
     if INFER_PROVIDERS:
-        db.api.remove()
         data = infer_providers(PROVIDERS)
         db.add_complex_object(data, many=True)
 
