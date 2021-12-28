@@ -1,3 +1,4 @@
+import os
 import urllib.request
 from collections import Counter
 
@@ -46,3 +47,13 @@ def infer_url_image(url: str, model="hog") -> np.array:
 
 def infer_fs_image(path: str, model="hog") -> np.array:
     return prepare_image(cv2.imread(path, cv2.COLOR_BGR2RGB), model)[0]
+
+
+def get_mongo_connection_param():
+    username = os.environ['MONGODB_USERNAME']
+    password = os.environ['MONGODB_PASSWORD']
+    host = os.environ['MONGODB_HOSTNAME']
+    port = 27017
+    db = os.environ['MONGODB_DATABASE']
+    collection = "facedb"
+    return [host, port, username, password, db, collection]
