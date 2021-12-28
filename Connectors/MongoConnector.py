@@ -4,8 +4,8 @@ from Connectors.IConnector import IConnector
 
 
 class MongoConnector(IConnector):
-    def __init__(self, host, port, db, collection):
-        self.api = MongoClient(host, port)[db][collection]
+    def __init__(self, host, port, username, password, db, collection):
+        self.api = MongoClient(host=host, port=port, username=username, password=password)[db][collection]
 
     def add_complex_object(self, docs, many=False):
         docs = self.__to_dict(docs)

@@ -3,8 +3,8 @@ import time
 import numpy as np
 from imutils.video import VideoStream
 
-import FaceUtils
-from Config import CAPTURE_INTERVAL, TEMP_IMAGE_PATH, OUTPUT_STRING
+import face_utils
+from Config.door_keeper_config import CAPTURE_INTERVAL, OUTPUT_STRING, TEMP_IMAGE_PATH
 from Config.telegram_bot_config import SHOT_PER_RECOGNIZE
 from Logging.PythonLogger import PythonLogger
 
@@ -24,14 +24,14 @@ class DoorKeeper:
             faces_matches, number_of_faces, non_empty_frame = [], 1, None
             for batch in range(self.shots_per_recognize):
                 frame = self.__get_frame()
-                encodings = FaceUtils.prepare_image(frame, model=self.model)
+                encodings = face_utils.prepare_image(frame, model=self.model)
                 if len(encodings) != 0:
                     number_of_faces, non_empty_frame = len(encodings), frame
                 for encoding in encodings:
-                    match = FaceUtils.compare_faces(faces_data, encoding)
+                    match = face_utils.compare_faces(faces_data, encoding)
                     if match: faces_matches.append(match)
                     time.sleep(CAPTURE_INTERVAL)
-            matches = FaceUtils.determine_persons(faces_matches, number_of_faces)
+            matches = face_utils.determine_persons(faces_matches, number_of_faces)
             if non_empty_frame is not None:
                 self.__send_message(matches, non_empty_frame)
 
@@ -39,10 +39,10 @@ class DoorKeeper:
         frame = self.vs.read()
         if frame is not None:
             return frame
-        raise FaceUtils.FaceException("Cant get frame from VideoStream")
+        raise face_utils.VideoStreamException("Cant get frame from VideoStream")
 
     def __send_message(self, matches: list, frame: np.array):
-        FaceUtils.save_frame_to_disk(TEMP_IMAGE_PATH, frame)
+        face_utils.save_frame_to_disk(TEMP_IMAGE_PATH, frame)
         if matches:
             persons = ",".join([str(person[0]) for person in matches])
             self.__upload_to_output_stream(OUTPUT_STRING.format(persons=persons), TEMP_IMAGE_PATH)

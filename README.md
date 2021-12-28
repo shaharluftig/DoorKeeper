@@ -6,12 +6,10 @@ Its uses telegram API to send a message every time someone recognized is passing
 Feel free to look and use the code, its working really well :)
 
 QuickStart:
-1. Create Empty MongoDB instance and fill Host, Port, DB and collection
-   - Docker command: docker run --name door-keeper-db -d -it -p 27017:27017 mongo
-2. Create a Telegram bot using this this tutorial: https://medium.com/@ManHay_Hong/how-to-create-a-telegram-bot-and-send-messages-with-python-4cf314d9fa3e
-   And Fill Telegram Bot Token and Chat Id
-3. Add images to ./Images folder, and set the name of each image to person name
-4. set IP_CAMERA_URL to your ip camera ip (I used IP Webcam android app), for example "http://192.168.1.24:8080/video"
-4. Run Main.py
+1. Create a Telegram bot using this tutorial: https://medium.com/@ManHay_Hong/how-to-create-a-telegram-bot-and-send-messages-with-python-4cf314d9fa3e
+   And Fill Telegram Bot Token and Chat ID
+2. Add images to ./Images folder, and set the name of each image to person name
+3. set IP_CAMERA_URL to your ip camera ip (I used IP Webcam android app), for example "http://192.168.1.24:8080/video"
+4. Run docker-compose up
 
 ~ Use INFER_PROVIDERS Only on the first run in order to load all providers to mongo, after that set it to False ~
