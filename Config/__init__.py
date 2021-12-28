@@ -1,10 +1,9 @@
-THRESHOLD = 0.5
-CAPTURE_INTERVAL = 0.05
-OUTPUT_INTERVAL = 0.5
-OUTPUT_STRING = "{persons} in the door!"
-TEMP_IMAGE_PATH = "./Temp/temp.jpg"
+from DataProviders.FSProvider import FSProvider
 
-FULL_NAME = "full_name"
-PK = "pk"
-ENCODING = "encoding"
-PATH = "path"
+# Env Setup
+TELEGRAM_BOT_TOKEN = ""
+TELEGRAM_BOT_CHAT_ID = ""
+
+IP_CAMERA_URL = ""
+INFER_PROVIDERS = True
+PROVIDERS = [FSProvider("./Images")]

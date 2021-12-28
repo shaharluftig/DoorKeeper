@@ -1,6 +1,6 @@
 import os
 
-import FaceUtils
+import face_utils
 from DataProviders.IProvider import IProvider
 from Logging.PythonLogger import PythonLogger
 from Models.UserFace import UserFace
@@ -19,6 +19,6 @@ class FSProvider(IProvider):
         for image in os.listdir(self.path):
             image_path = self.path + "/" + image
             logger.log(f"Inferring : {image_path}")
-            encoding = FaceUtils.infer_fs_image(image_path, self.model).tolist()
+            encoding = face_utils.infer_fs_image(image_path, self.model).tolist()
             faces_data.append(UserFace(image.split(".")[0], image_path, encoding, image_path))
         return faces_data

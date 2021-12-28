@@ -1,6 +1,6 @@
 import numpy as np
 
-from Config import FULL_NAME, PK, ENCODING, PATH
+from Config.constants import FULL_NAME, PK, ENCODING, PATH
 from Connectors.MongoConnector import MongoConnector
 from Logging.PythonLogger import PythonLogger
 from Models.UserFace import UserFace
