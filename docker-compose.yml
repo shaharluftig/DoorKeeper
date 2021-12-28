@@ -6,7 +6,6 @@ services:
     container_name: doorkeeper
     restart: unless-stopped
     environment:
-      APP_ENV: "prod"
       MONGODB_DATABASE: facesdb
       MONGODB_USERNAME: admin
       MONGODB_PASSWORD: admin

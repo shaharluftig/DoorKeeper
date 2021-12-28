@@ -7,10 +7,11 @@ import face_recognition
 import imutils
 import numpy as np
 
-from Config import THRESHOLD
+from Config.door_keeper_config import THRESHOLD
 
 
-class FaceException(Exception):
+class VideoStreamException(Exception):
+    """Raised when VideoStream is unreachable """
     pass
 
 
