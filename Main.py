@@ -12,6 +12,7 @@ def infer_providers(providers):
         user_faces += provider.get_faces_data()
     return user_faces
 
+
 if __name__ == '__main__':
     db = FacesDB(*face_utils.get_mongo_connection_param())
     if INFER_PROVIDERS:
