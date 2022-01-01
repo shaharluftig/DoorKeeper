@@ -8,7 +8,7 @@ from face_utils import infer_providers
 
 
 async def main():
-    db = FacesDB(host=config.mongo_host, port=config.mongo_port, username=config.mongo_username,
+    db = FacesDB(host=config.mongo_host, port=int(config.mongo_port), username=config.mongo_username,
                  password=config.mongo_password, db=config.mongo_db, collection=config.mongo_collection)
 
     if config.infer_providers:
