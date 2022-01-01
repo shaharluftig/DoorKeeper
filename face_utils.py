@@ -1,4 +1,3 @@
-import os
 import urllib.request
 from collections import Counter
 
@@ -8,6 +7,9 @@ import imutils
 import numpy as np
 
 from Config.door_keeper_config import THRESHOLD
+from Logging.PythonLogger import PythonLogger
+
+logger = PythonLogger()
 
 
 class VideoStreamException(Exception):
@@ -26,7 +28,7 @@ def determine_persons(matches: list, number_of_faces: int):
     return Counter(matches).most_common(number_of_faces)
 
 
-def compare_faces(faces_data: dict, encoding: np.array):
+async def compare_faces(faces_data: list, encoding: np.array):
     distances = [1 - distance for distance in
                  face_recognition.face_distance([person.encoding for person in faces_data], encoding)]
     faces_data_distances = dict(zip(distances, faces_data))
@@ -35,7 +37,7 @@ def compare_faces(faces_data: dict, encoding: np.array):
         return faces_data_distances[best_match]
 
 
-def save_frame_to_disk(file_name: str, frame: np.array):
+async def save_frame_to_disk(file_name: str, frame: np.array):
     if frame is not None:
         cv2.imwrite(file_name, frame)
 
@@ -47,14 +49,10 @@ def infer_url_image(url: str, model="hog") -> np.array:
 
 
 def infer_fs_image(path: str, model="hog") -> np.array:
+    logger.log(f"Inferring {path}")
     return prepare_image(cv2.imread(path, cv2.COLOR_BGR2RGB), model)[0]
 
 
-def get_mongo_connection_param():
-    username = os.environ['MONGODB_USERNAME']
-    password = os.environ['MONGODB_PASSWORD']
-    host = os.environ['MONGODB_HOSTNAME']
-    port = 27017
-    db = os.environ['MONGODB_DATABASE']
-    collection = "facedb"
-    return [host, port, username, password, db, collection]
+def infer_providers(providers, db):
+    providers_data = sum([provider.get_all_faces_data() for provider in providers], [])
+    db.add_complex_object(providers_data, many=True)

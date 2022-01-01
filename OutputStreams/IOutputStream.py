@@ -1,3 +1,3 @@
 class IOutputStream:
-    def send_message(self, message):
+    def notify(self, *args, **kwargs):
         raise NotImplementedError
