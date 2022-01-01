@@ -54,5 +54,5 @@ def infer_fs_image(path: str, model="hog") -> np.array:
 
 
 def infer_providers(providers, db):
-    providers_data = sum([provider.get_faces_data() for provider in providers], [])
+    providers_data = sum([provider.get_all_faces_data() for provider in providers], [])
     db.add_complex_object(providers_data, many=True)

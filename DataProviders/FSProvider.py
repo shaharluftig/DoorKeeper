@@ -14,7 +14,7 @@ class FSProvider(IProvider):
         self.model = model
 
     @logger.session_log
-    def get_faces_data(self) -> [UserFace]:
+    def get_all_faces_data(self) -> [UserFace]:
         listdir = os.listdir(self.path)
         images = [file for file in listdir if os.path.isfile(f"{self.path}/{file}")]
         faces_data = [self.get_face_data(f"{self.path}/{image}") for image in images]
