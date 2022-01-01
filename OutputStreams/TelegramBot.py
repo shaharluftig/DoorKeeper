@@ -2,6 +2,7 @@ import asyncio
 
 import telegram
 
+from Config.telegram_bot_config import SLEEP_INTERVAL
 from OutputStreams.IOutputStream import IOutputStream
 
 
@@ -19,4 +20,4 @@ class TelegramBot(IOutputStream):
 
     async def notify(self, path: str, message):
         await self.__send_image(path, message)
-        await asyncio.sleep(3)
+        await asyncio.sleep(SLEEP_INTERVAL)
