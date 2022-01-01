@@ -3,7 +3,7 @@ import os
 from DataProviders.FSProvider import FSProvider
 
 # Env Setup
-ENV = "dev"
+ENV = "prod"
 
 
 class DefaultConfig:
@@ -20,7 +20,7 @@ class ProdConfig(DefaultConfig):
     mongo_username = os.environ.get('MONGODB_USERNAME')
     mongo_password = os.environ.get('MONGODB_PASSWORD')
     mongo_host = os.environ.get('MONGODB_HOSTNAME')
-    mongo_port = os.environ.get('MONGODB_PORT')
+    mongo_port = int(os.environ.get('MONGODB_PORT'))
     mongo_db = os.environ.get('MONGODB_DATABASE')
 
 
