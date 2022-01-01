@@ -130,3 +130,7 @@ dmypy.json
 
 # Jetbrains
 .idea/
+
+# DoorKeeper
+./Images/
+./Temp/
