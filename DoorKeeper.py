@@ -34,7 +34,7 @@ class DoorKeeper:
                 if len(encodings) != 0:
                     number_of_faces, non_empty_frame = len(encodings), frame
                 matches_future = [face_utils.compare_faces(self.faces_data, encoding) for encoding in encodings]
-                faces_matches = filter(None, await asyncio.gather(*matches_future))
+                faces_matches = list(filter(None, await asyncio.gather(*matches_future)))
                 time.sleep(CAPTURE_INTERVAL)
             matches = face_utils.determine_persons(faces_matches, number_of_faces)
             if non_empty_frame is not None:
