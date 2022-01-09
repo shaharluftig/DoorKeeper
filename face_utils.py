@@ -1,3 +1,4 @@
+import secrets
 import urllib.request
 from collections import Counter
 
@@ -8,6 +9,7 @@ import numpy as np
 
 from Config.door_keeper_config import THRESHOLD
 from Logging.PythonLogger import PythonLogger
+from Models.UserFace import UserFace
 
 logger = PythonLogger()
 
@@ -33,13 +35,20 @@ def determine_persons(matches: list, number_of_faces: int):
     return Counter(matches).most_common(number_of_faces)
 
 
-async def compare_faces(faces_data: list, encoding: np.array):
+async def compare_faces(faces_data: list, encoding: np.array) -> UserFace:
     distances = [1 - distance for distance in
                  face_recognition.face_distance([person.encoding for person in faces_data], encoding)]
     faces_data_distances = dict(zip(distances, faces_data))
     best_match = max(faces_data_distances, key=float)
     if best_match >= THRESHOLD:
         return faces_data_distances[best_match]
+    return await get_generated_userface()
+
+
+async def get_generated_userface() -> UserFace:
+    name = secrets.token_urlsafe(7)
+    return UserFace(full_name=f"unknown_{name}", pk=f"./Images/{name}.jpg", encoding=None,
+                    path=f"./Images/{name}.jpg")
 
 
 async def save_frame_to_disk(file_name: str, frame: np.array):

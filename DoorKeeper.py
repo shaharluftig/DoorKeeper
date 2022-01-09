@@ -1,5 +1,4 @@
 import asyncio
-import secrets
 from datetime import datetime
 
 import numpy as np
@@ -8,7 +7,6 @@ from imutils.video import VideoStream
 import face_utils
 from Config.constants import TIME, LAST_MESSAGE
 from Config.door_keeper_config import OUTPUT_STRING, TEMP_IMAGE_PATH, REPEATED_FACE_TIMEOUT
-from DataProviders.FSProvider import FSProvider
 from Logging.PythonLogger import PythonLogger
 
 logger = PythonLogger()
@@ -44,25 +42,8 @@ class DoorKeeper:
 
     async def __send_message(self, matches: list, frame: np.array):
         await face_utils.save_frame_to_disk(TEMP_IMAGE_PATH, frame)
-        if matches:
-            persons = ",".join(sorted([str(person[0]) for person in matches]))
-            await self.__schedule_to_output_stream(OUTPUT_STRING.format(persons=persons), TEMP_IMAGE_PATH)
-        else:
-            generated_name = await self.__generate_person()
-            await self.__schedule_to_output_stream(OUTPUT_STRING.format(persons=f"{generated_name}"),
-                                                   TEMP_IMAGE_PATH)
-
-    async def __generate_person(self, add_to_faces_data=False):
-        """
-        Generates a hash to unknown person, if add_to_faces_data is True,
-        the unknown will be inferred (experimental!)
-        """
-        generated_name = f"unknown_{secrets.token_urlsafe(7)}"
-        if add_to_faces_data:
-            face_data = FSProvider().get_face_data(TEMP_IMAGE_PATH)
-            face_data.full_name = generated_name
-            self.faces_data.append(face_data)
-        return generated_name
+        persons = ",".join(sorted([str(person[0]) for person in matches]))
+        await self.__schedule_to_output_stream(OUTPUT_STRING.format(persons=persons), TEMP_IMAGE_PATH)
 
     async def __schedule_to_output_stream(self, message: str, image_path: str):
         time = datetime.now()
