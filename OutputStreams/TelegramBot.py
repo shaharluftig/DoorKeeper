@@ -1,9 +1,9 @@
-import asyncio
-
 import telegram
 
-from Config.telegram_bot_config import SLEEP_INTERVAL
+from Logging.PythonLogger import PythonLogger
 from OutputStreams.IOutputStream import IOutputStream
+
+logger = PythonLogger()
 
 
 class TelegramBot(IOutputStream):
@@ -19,5 +19,5 @@ class TelegramBot(IOutputStream):
         self.bot.send_photo(self.bot_chat_id, photo=open(path, 'rb'), caption=caption)
 
     async def notify(self, path: str, message):
+        logger.log(message)
         await self.__send_image(path, message)
-        await asyncio.sleep(SLEEP_INTERVAL)

@@ -24,7 +24,7 @@ def show_image(image):
 
 def prepare_image(image, model="hog") -> np.array:
     rgb = imutils.resize(image, width=750)
-    boxes = face_recognition.face_locations(rgb, model=model)
+    boxes = face_recognition.face_locations(rgb, number_of_times_to_upsample=2, model=model)
     encoding = face_recognition.face_encodings(rgb, boxes)
     return encoding
 
