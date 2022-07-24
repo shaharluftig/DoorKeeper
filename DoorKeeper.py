@@ -9,6 +9,7 @@ import face_utils
 from config.constants import TIME, LAST_MESSAGE
 from config.door_keeper_config import OUTPUT_STRING, TEMP_IMAGE_PATH, REPEATED_FACE_TIMEOUT
 from encoders.implementations.FaceEncoder import FaceEncoder
+from face_compares.implementations.FaceDistanceCompare import FaceDistanceCompare
 from loggers.implementations.PythonLogger import PythonLogger
 from models.UserFace import UserFace
 from output_streams.IOutputStream import IOutputStream
@@ -25,6 +26,7 @@ class DoorKeeper:
         self.model = model
         self.last_message = None
         self.encoder = FaceEncoder()
+        self.face_compare = FaceDistanceCompare()
 
     @logger.session_log
     async def start_recognizing(self):
@@ -34,7 +36,7 @@ class DoorKeeper:
             encodings = self.encoder.encode(frame)
             if len(encodings) != 0:
                 number_of_faces, non_empty_frame = len(encodings), frame
-            matches_future = [face_utils.compare_faces(self.faces_data, encoding) for encoding in encodings]
+            matches_future = [self.face_compare.compare_faces(self.faces_data, encoding) for encoding in encodings]
             faces_matches = list(filter(None, await asyncio.gather(*matches_future)))
             matches = face_utils.determine_persons(faces_matches, number_of_faces)
             if non_empty_frame is not None:

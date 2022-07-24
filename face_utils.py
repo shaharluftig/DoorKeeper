@@ -2,10 +2,8 @@ import secrets
 from collections import Counter
 
 import cv2
-import face_recognition
 import numpy as np
 
-from config.door_keeper_config import THRESHOLD
 from encoders.IEncoder import IEncoder
 from loggers.implementations.PythonLogger import PythonLogger
 from models.UserFace import UserFace
@@ -25,16 +23,6 @@ def show_image(image):
 
 def determine_persons(matches: list, number_of_faces: int):
     return Counter(matches).most_common(number_of_faces)
-
-
-async def compare_faces(faces_data: list, encoding: np.array) -> UserFace:
-    distances = [1 - distance for distance in
-                 face_recognition.face_distance([person.encoding for person in faces_data], encoding)]
-    faces_data_distances = dict(zip(distances, faces_data))
-    best_match = max(faces_data_distances, key=float)
-    if best_match >= THRESHOLD:
-        return faces_data_distances[best_match]
-    return await get_generated_userface()
 
 
 async def get_generated_userface() -> UserFace:

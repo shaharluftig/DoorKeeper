@@ -12,6 +12,9 @@ logger = PythonLogger()
 
 
 class FSProvider(IProvider):
+    """
+    FileSystem provider is used to get all faces from filesystem.
+    """
     def __init__(self, path="./images", encoder: IEncoder = FaceEncoder()):
         self.encoder = encoder
         self.path = path
