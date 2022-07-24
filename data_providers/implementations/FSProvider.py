@@ -1,17 +1,20 @@
 import os
 
+from loggers.implementations.PythonLogger import PythonLogger
+
 import face_utils
-from DataProviders.IProvider import IProvider
-from Logging.PythonLogger import PythonLogger
-from Models.UserFace import UserFace
+from data_providers.IProvider import IProvider
+from encoders.IEncoder import IEncoder
+from encoders.implementations.FaceEncoder import FaceEncoder
+from models.UserFace import UserFace
 
 logger = PythonLogger()
 
 
 class FSProvider(IProvider):
-    def __init__(self, path="./Images", model="hog"):
+    def __init__(self, path="./images", encoder: IEncoder = FaceEncoder()):
+        self.encoder = encoder
         self.path = path
-        self.model = model
 
     @logger.session_log
     def get_all_faces_data(self) -> [UserFace]:
@@ -22,6 +25,6 @@ class FSProvider(IProvider):
 
     def get_face_data(self, image_path) -> [UserFace]:
         face_data = UserFace(image_path.split("/")[-1].split(".")[0], image_path,
-                             face_utils.infer_fs_image(image_path, self.model).tolist(),
+                             face_utils.infer_fs_image(image_path, self.encoder).tolist(),
                              image_path)
         return face_data

@@ -1,15 +1,14 @@
 import secrets
-import urllib.request
 from collections import Counter
 
 import cv2
 import face_recognition
-import imutils
 import numpy as np
 
-from Config.door_keeper_config import THRESHOLD
-from Logging.PythonLogger import PythonLogger
-from Models.UserFace import UserFace
+from config.door_keeper_config import THRESHOLD
+from encoders.IEncoder import IEncoder
+from loggers.implementations.PythonLogger import PythonLogger
+from models.UserFace import UserFace
 
 logger = PythonLogger()
 
@@ -22,13 +21,6 @@ class VideoStreamException(Exception):
 def show_image(image):
     cv2.imshow("face", image)
     cv2.waitKey(0)
-
-
-def prepare_image(image, model="hog") -> np.array:
-    rgb = imutils.resize(image, width=750)
-    boxes = face_recognition.face_locations(rgb, number_of_times_to_upsample=2, model=model)
-    encoding = face_recognition.face_encodings(rgb, boxes)
-    return encoding
 
 
 def determine_persons(matches: list, number_of_faces: int):
@@ -56,15 +48,9 @@ async def save_frame_to_disk(file_name: str, frame: np.array):
         cv2.imwrite(file_name, frame)
 
 
-def infer_url_image(url: str, model="hog") -> np.array:
-    resp = urllib.request.urlopen(url)
-    image = np.asarray(bytearray(resp.read()), dtype="uint8")
-    return prepare_image(cv2.imdecode(image, cv2.COLOR_BGR2RGB), model)
-
-
-def infer_fs_image(path: str, model="hog") -> np.array:
+def infer_fs_image(path: str, encoder: IEncoder) -> np.array:
     logger.log(f"Inferring {path}")
-    return prepare_image(cv2.imread(path, cv2.COLOR_BGR2RGB), model)[0]
+    return encoder.encode(cv2.imread(path, cv2.COLOR_BGR2RGB))[0]
 
 
 def infer_providers(providers, db):

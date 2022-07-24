@@ -1,7 +1,6 @@
 import logging
-
-from Config.python_logger_config import PYTHON_LOGGER_NAME
-from Logging.ILogger import ILogger
+from config.python_logger_config import PYTHON_LOGGER_NAME
+from loggers.ILogger import ILogger
 
 
 class PythonLogger(ILogger):

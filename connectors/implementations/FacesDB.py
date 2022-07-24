@@ -1,9 +1,9 @@
 import numpy as np
 
-from Config.constants import FULL_NAME, PK, ENCODING, PATH
-from Connectors.MongoConnector import MongoConnector
-from Logging.PythonLogger import PythonLogger
-from Models.UserFace import UserFace
+from config.constants import FULL_NAME, PK, ENCODING, PATH
+from connectors.implementations.MongoConnector import MongoConnector
+from loggers.implementations.PythonLogger import PythonLogger
+from models.UserFace import UserFace
 
 logger = PythonLogger()
 

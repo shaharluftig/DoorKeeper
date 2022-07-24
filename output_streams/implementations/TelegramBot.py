@@ -1,7 +1,7 @@
 import telegram
 
-from Logging.PythonLogger import PythonLogger
-from OutputStreams.IOutputStream import IOutputStream
+from loggers.implementations.PythonLogger import PythonLogger
+from output_streams.IOutputStream import IOutputStream
 
 logger = PythonLogger()
 
