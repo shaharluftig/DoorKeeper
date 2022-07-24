@@ -1,9 +1,9 @@
 import os
 
-from DataProviders.FSProvider import FSProvider
+from data_providers.implementations.FSProvider import FSProvider
 
 # Env Setup
-ENV = "prod"
+ENV = "dev"
 
 
 class DefaultConfig:
@@ -12,7 +12,7 @@ class DefaultConfig:
     mongo_collection = "facedb"
 
     infer_providers = True
-    providers = [FSProvider("./Images")]
+    providers = [FSProvider("./images")]
 
 
 class ProdConfig(DefaultConfig):

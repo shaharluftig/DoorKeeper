@@ -132,5 +132,4 @@ dmypy.json
 .idea/
 
 # DoorKeeper
-./Images/
-./Temp/
+images/

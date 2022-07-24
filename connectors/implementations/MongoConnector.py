@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
-from Connectors.IConnector import IConnector
+from connectors.IConnector import IConnector
 
 
 class MongoConnector(IConnector):

@@ -1,4 +1,4 @@
-from Models.UserFace import UserFace
+from models.UserFace import UserFace
 
 
 class IProvider:
