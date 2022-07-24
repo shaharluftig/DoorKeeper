@@ -3,7 +3,7 @@ import os
 from data_providers.implementations.FSProvider import FSProvider
 
 # Env Setup
-ENV = "dev"
+ENV = "prod"
 
 
 class DefaultConfig:
