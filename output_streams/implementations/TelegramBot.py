@@ -1,9 +1,7 @@
 import telegram
 
-from loggers.implementations.PythonLogger import PythonLogger
 from output_streams.IOutputStream import IOutputStream
-
-logger = PythonLogger()
+from setup_logger import logger
 
 
 class TelegramBot(IOutputStream):
@@ -19,5 +17,5 @@ class TelegramBot(IOutputStream):
         self.bot.send_photo(self.bot_chat_id, photo=open(path, 'rb'), caption=caption)
 
     async def notify(self, path: str, message):
-        logger.log(message)
+        logger.info(message)
         await self.__send_image(path, message)

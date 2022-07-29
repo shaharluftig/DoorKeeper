@@ -5,10 +5,8 @@ import cv2
 import numpy as np
 
 from encoders.IEncoder import IEncoder
-from loggers.implementations.PythonLogger import PythonLogger
 from models.UserFace import UserFace
-
-logger = PythonLogger()
+from setup_logger import logger
 
 
 class VideoStreamException(Exception):
@@ -37,7 +35,7 @@ async def save_frame_to_disk(file_name: str, frame: np.array):
 
 
 def infer_fs_image(path: str, encoder: IEncoder) -> np.array:
-    logger.log(f"Inferring {path}")
+    logger.info(f"Inferring {path}")
     return encoder.encode(cv2.imread(path, cv2.COLOR_BGR2RGB))[0]
 
 
