@@ -1,1 +1,0 @@
-PYTHON_LOGGER_NAME = "DoorKeeperLogs"

@@ -6,12 +6,10 @@ from imutils.video import VideoStream
 import face_utils
 from encoders.implementations.FaceEncoder import FaceEncoder
 from face_compares.implementations.FaceDistanceCompare import FaceDistanceCompare
-from loggers.implementations.PythonLogger import PythonLogger
 from models.UserFace import UserFace
 from output_streams.IOutputStream import IOutputStream
 from schedulers.implementations.LastMessegeScheduler import LastMessageScheduler
-
-logger = PythonLogger()
+from setup_logger import logger
 
 
 class DoorKeeper:
@@ -25,8 +23,8 @@ class DoorKeeper:
         self.encoder = FaceEncoder()
         self.face_compare = FaceDistanceCompare()
 
-    @logger.session_log
     async def start_recognizing(self):
+        logger.info("Start recognizing")
         while True:
             number_of_faces, non_empty_frame = 1, None
             frame = self.__get_frame()
