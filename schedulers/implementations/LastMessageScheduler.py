@@ -8,12 +8,12 @@ import face_utils
 from config.constants import LAST_MESSAGE, TIME
 from config.door_keeper_config import TEMP_IMAGE_PATH, OUTPUT_STRING, REPEATED_FACE_TIMEOUT
 from output_streams.IOutputStream import IOutputStream
-from schedulers.IScheduler import IScheduler
+from schedulers.Scheduler import Scheduler
 
 
-class LastMessageScheduler(IScheduler):
+class LastMessageScheduler(Scheduler):
     def __init__(self, output_streams: List[IOutputStream], repeated_face_timeout=REPEATED_FACE_TIMEOUT):
-        self.output_streams = output_streams
+        super().__init__(output_streams)
         self.last_message = None
         self.repeated_face_timeout = repeated_face_timeout
 

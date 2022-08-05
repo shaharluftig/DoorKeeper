@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 services:
 
   doorkeeper:
@@ -11,6 +11,7 @@ services:
       MONGODB_PASSWORD: admin
       MONGODB_HOSTNAME: mongodb
       MONGODB_PORT: 27017
+      IP_CAMERA_URL: 0
     volumes:
       - appdata:/var/www
     depends_on:
