@@ -4,27 +4,29 @@ from typing import List
 from imutils.video import VideoStream
 
 import face_utils
+from encoders.IEncoder import IEncoder
 from encoders.implementations.FaceEncoder import FaceEncoder
+from face_compares.IFaceCompare import IFaceCompare
 from face_compares.implementations.FaceDistanceCompare import FaceDistanceCompare
 from models.UserFace import UserFace
-from output_streams.IOutputStream import IOutputStream
-from schedulers.implementations.LastMessegeScheduler import LastMessageScheduler
+from schedulers.Scheduler import Scheduler
 from setup_logger import logger
 
 
 class DoorKeeper:
-    def __init__(self, faces_data: List[UserFace], ip_cam_url: str, output_streams: List[IOutputStream],
+    def __init__(self, faces_data: List[UserFace], ip_cam_url: str, scheduler: Scheduler,
+                 encoder: IEncoder = FaceEncoder(), face_compare: IFaceCompare = FaceDistanceCompare(),
                  model: str = "hog"):
         self.faces_data = faces_data
         self.vs = VideoStream(src=ip_cam_url).start()
-        self.scheduler = LastMessageScheduler(output_streams)
+        self.scheduler = scheduler
         self.model = model
+        self.encoder = encoder
+        self.face_compare = face_compare
         self.last_message = None
-        self.encoder = FaceEncoder()
-        self.face_compare = FaceDistanceCompare()
 
     async def start_recognizing(self):
-        logger.info("Start recognizing")
+        logger.info("Starting to recognize")
         while True:
             number_of_faces, non_empty_frame = 1, None
             frame = self.__get_frame()

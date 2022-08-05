@@ -10,13 +10,12 @@ class DefaultConfig:
     telegram_bot_token = ""
     telegram_bot_chat_id = ""
     mongo_collection = "facedb"
-
-    infer_providers = True
     providers = [FSProvider("./images")]
 
 
 class ProdConfig(DefaultConfig):
-    ip_camera_url = ""
+    infer_providers = True
+    ip_camera_url = os.environ.get('IP_CAMERA_URL')
     mongo_username = os.environ.get('MONGODB_USERNAME')
     mongo_password = os.environ.get('MONGODB_PASSWORD')
     mongo_host = os.environ.get('MONGODB_HOSTNAME')
@@ -25,6 +24,7 @@ class ProdConfig(DefaultConfig):
 
 
 class DevConfig(DefaultConfig):
+    infer_providers = True
     ip_camera_url = 0
     mongo_username = "admin"
     mongo_password = "admin"

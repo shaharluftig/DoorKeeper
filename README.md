@@ -8,7 +8,7 @@ Feel free to look and use the code, its working really well :)
 Quickstart:
 1. Create a Telegram bot using this tutorial: https://medium.com/@ManHay_Hong/how-to-create-a-telegram-bot-and-send-messages-with-python-4cf314d9fa3e
 2. Fill Telegram Bot Token and Chat ID under ./Config/__init__
-3. set IP_CAMERA_URL to your ip camera ip (I used IP Webcam android app) also under ./Config/__init__, for example "http://192.168.1.24:8080/video"
+3. set IP_CAMERA_URL to your ip camera ip (I used IP Webcam android app) under docker-compose.yml, for example "http://192.168.1.24:8080/video"
 4. Add images to ./Images folder, and set the name of each image to person name
 5. Run docker-compose up
 
