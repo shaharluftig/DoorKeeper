@@ -5,7 +5,6 @@ from typing import List
 import numpy as np
 
 import face_utils
-from config.constants import TIMESTAMP, NAMES
 from config.door_keeper_config import TEMP_IMAGE_PATH, REPEATED_FACE_TIMEOUT
 from models.Guests import Guests
 from output_streams.IOutputStream import IOutputStream
@@ -30,7 +29,3 @@ class LastMessageScheduler(Scheduler):
         await face_utils.save_frame_to_disk(TEMP_IMAGE_PATH, frame)
         [asyncio.create_task(stream.notify(path=TEMP_IMAGE_PATH, guests=door_message)) for stream in
          self.output_streams]
-
-    @staticmethod
-    def __arrange_output(names: List[str], current_time: datetime):
-        return {NAMES: names, TIMESTAMP: current_time}
