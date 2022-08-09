@@ -6,7 +6,8 @@ DoorKeeper is a simple and easy to use application that allows you to alert ever
 Feel free to fork and make contributions. I’ll try to get them into the main application.
 
 
-### Installation: using telegram-bot notifier
+### Installation
+##### using telegram-bot notifier
 
 1. Create a Telegram bot using this tutorial: https://medium.com/@ManHay_Hong/how-to-create-a-telegram-bot-and-send-messages-with-python-4cf314d9fa3e
 2. Fill Telegram Bot Token and Chat ID under ./Config/__init__
