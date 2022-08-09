@@ -1,12 +1,12 @@
 # DoorKeeper   <img src="https://img.icons8.com/dusk/64/000000/dome-camera.png" width="48">
 
 
-Hello everyone!
-This is a small project I did at my home in order to alert me every time someone is passing through my security camera.
-Its uses telegram API to send a message every time someone recognized is passing through a network camera.
-Feel free to look and use the code, its working really well :)
+DoorKeeper is a simple and easy to use application that allows you to alert every time someone is passing through your IP Camera.
 
-### Installation 
+Feel free to fork and make contributions. I’ll try to get them into the main application.
+
+
+### Installation: using telegram-bot notifier
 
 1. Create a Telegram bot using this tutorial: https://medium.com/@ManHay_Hong/how-to-create-a-telegram-bot-and-send-messages-with-python-4cf314d9fa3e
 2. Fill Telegram Bot Token and Chat ID under ./Config/__init__
