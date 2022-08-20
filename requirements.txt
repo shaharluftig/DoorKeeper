@@ -1,9 +1,8 @@
-face-recognition
-face-recognition-models
-numpy
-opencv-contrib-python
-python-telegram-bot
-urllib3
-pymongo
-telegram
-imutils
+face-recognition==1.3.*
+face-recognition-models==0.3.*
+numpy==1.21.*
+opencv-contrib-python==4.5.5.*
+python-telegram-bot==13.9
+urllib3==1.26.*
+pymongo==4.0.*
+imutils==0.5.*
